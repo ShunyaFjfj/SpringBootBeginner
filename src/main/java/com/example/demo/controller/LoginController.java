@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.context.MessageSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +29,7 @@ public class LoginController {
 	private final LoginService service;
 
 	/** PasswordEncoder */
-	private final PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	/** メッセージソース */
 	private final MessageSource messageSource;
