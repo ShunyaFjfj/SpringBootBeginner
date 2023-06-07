@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.constant.MessageConst;
+import com.example.demo.constant.UrlConst;
 import com.example.demo.form.LoginForm;
 import com.example.demo.service.LoginService;
 import com.example.demo.util.AppUtil;
@@ -41,7 +42,7 @@ public class LoginController {
 	 * @param form 入力情報
 	 * @return　表示画面
 	 */
-	@GetMapping("/login")
+	@GetMapping(UrlConst.LOGIN)
 	public String view(Model model, LoginForm form) {
 		return "login";
 	}
@@ -53,7 +54,7 @@ public class LoginController {
 	 * @param form 入力情報
 	 * @return 表示画面
 	 */
-	@PostMapping("/login")
+	@PostMapping(UrlConst.LOGIN)
 	public String login(Model model, LoginForm form) {
 		var userInfo = service.searchUserById(form.getLoginId());
 		var isCorrectUserAuth = userInfo.isPresent()

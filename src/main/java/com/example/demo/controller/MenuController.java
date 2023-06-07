@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.example.demo.constant.UrlConst;
+
 /**
  * メニュー画面 コントローラー
  * 
@@ -17,7 +19,7 @@ public class MenuController {
 	 * 
 	 * @return　表示画面
 	 */
-	@GetMapping("/menu")
+	@GetMapping(UrlConst.MENU)
 	public String view() {
 
 		return "menu";
