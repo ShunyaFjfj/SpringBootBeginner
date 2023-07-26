@@ -7,6 +7,18 @@
 <body>
 <div th:insert="common/sourceList :: sourceList"></div>
 <div th:replace="common/header :: header"></div>
-トップメニューだよ
+<div class="container-fluid">
+	<h2>トップメニュー</h2>
+	<div class="mt-3">
+		商品一覧の確認、管理はコチラ
+	</div>
+	<a href="" class="btn btn-primary">商品一覧画面へ</a>
+	<th:block th:if="${hasUserManageAuth}">
+		<div class="mt-3">
+			ユーザー情報の管理はコチラ
+		</div>
+		<a href="" class="btn btn-danger">ユーザー管理画面へ</a>
+	</th:block>
+</div>
 </body>
 </html>
