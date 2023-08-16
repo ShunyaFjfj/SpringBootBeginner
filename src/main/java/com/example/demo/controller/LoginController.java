@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 /**
- * ログイン画面 Controller
+ * ログイン画面Controllerクラス
  * 
  * @author ys-fj
  *
@@ -25,11 +25,11 @@ public class LoginController {
 	private final HttpSession session;
 
 	/**
-	 * 初期表示
+	 * 画面の初期表示を行います。
 	 * 
 	 * @param model モデル
 	 * @param form 入力情報
-	 * @return 表示画面
+	 * @return ログイン画面
 	 */
 	@GetMapping(UrlConst.LOGIN)
 	public String view(Model model, LoginForm form) {
@@ -37,11 +37,11 @@ public class LoginController {
 	}
 
 	/**
-	 * ログインエラー画面表示
+	 * ログインエラー時にセッションからエラーメッセージを取得して、画面の表示を行います。
 	 * 
 	 * @param model モデル
 	 * @param form 入力情報
-	 * @return 表示画面
+	 * @return ログイン画面
 	 */
 	@GetMapping(value = UrlConst.LOGIN, params = "error")
 	public String viewWithError(Model model, LoginForm form) {

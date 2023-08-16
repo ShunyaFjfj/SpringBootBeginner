@@ -10,7 +10,7 @@ import com.example.demo.constant.AuthorityKind;
 import com.example.demo.constant.UrlConst;
 
 /**
- * メニュー画面 コントローラー
+ * メニュー画面Controllerクラス
  * 
  * @author ys-fj
  *
@@ -19,11 +19,13 @@ import com.example.demo.constant.UrlConst;
 public class MenuController {
 
 	/**
-	 * 初期表示
+	 * 画面の初期表示を行います。
 	 * 
-	 * @param user ユーザー情報
+	 * <p>その際、ユーザー情報から権限を確認し、ユーザー管理が可能かどうかを判定した結果を画面に渡します。
+	 * 
+	 * @param user 認証済みユーザー情報
 	 * @param model モデル
-	 * @return　表示画面
+	 * @return メニュー画面
 	 */
 	@GetMapping(UrlConst.MENU)
 	public String view(@AuthenticationPrincipal User user, Model model) {

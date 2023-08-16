@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * ユーザ情報テーブル Entity
+ * ユーザー情報テーブルEntityクラス
  * 
  * @author ys-fj
  *
@@ -45,31 +45,34 @@ public class UserInfo {
 	@Column
 	private String authority;
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
 	public UserInfo() {
 	}
 
 	/**
-	 * ログイン失敗回数をインクリメントする
+	 * ログイン失敗回数をインクリメントします。
 	 * 
-	 * @return ログイン失敗回数がインクリメントされたUserInfo
+	 * @return ログイン失敗回数がインクリメントされた、自身のインスタンス
 	 */
 	public UserInfo incrementLoginFailureCount() {
 		return new UserInfo(loginId, password, ++loginFailureCount, accountLockedTime, isDisabled, authority);
 	}
 
 	/**
-	 * ログイン失敗情報をリセットする
+	 * ログイン失敗情報をリセットします。
 	 * 
-	 * @return ログイン失敗情報がリセットされたUserInfo
+	 * @return ログイン失敗情報がリセットされた、自身のインスタンス
 	 */
 	public UserInfo resetLoginFailureInfo() {
 		return new UserInfo(loginId, password, 0, null, isDisabled, authority);
 	}
 
 	/**
-	 * アカウントロック状態に更新する
+	 * ログイン失敗回数、アカウントロック日時を更新し、アカウントロック状態に更新します。
 	 * 
-	 * @return ログイン失敗階位数、アカウントロック日時が更新されたUserInfo
+	 * @return ログイン失敗回数、アカウントロック日時が更新された、自身のインスタンス
 	 */
 	public UserInfo updateAccountLocked() {
 		return new UserInfo(loginId, password, 0, LocalDateTime.now(), isDisabled, authority);

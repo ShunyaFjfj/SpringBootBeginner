@@ -1,7 +1,7 @@
 package com.example.demo.constant;
 
 /**
- * URL 定数クラス
+ * リクエストURL定数クラス
  * 
  * @author ys-fj
  *
