@@ -24,8 +24,8 @@ public enum AuthorityKind {
 	/* 商品情報の確認、更新、全ユーザー情報の管理が可能 */
 	ITEM_AND_USER_MANAGER("3", "商品情報の確認、更新、全ユーザー情報の管理が可能");
 
-	/** 権限種別のコード値 */
-	private String value;
+	/** コード値 */
+	private String code;
 
 	/** 画面表示する説明文 */
 	private String displayValue;

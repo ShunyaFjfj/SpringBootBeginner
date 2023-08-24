@@ -45,7 +45,7 @@ public class SignupServiceImpl implements SignupService {
 		var userInfo = mapper.map(form, UserInfo.class);
 		var encodedPassword = passwordEncoder.encode(form.getPassword());
 		userInfo.setPassword(encodedPassword);
-		userInfo.setAuthority(AuthorityKind.ITEM_WATCHER.getAuthorityKind());
+		userInfo.setAuthority(AuthorityKind.ITEM_WATCHER.getCode());
 
 		return Optional.of(repository.save(userInfo));
 	}
