@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ユーザー一覧</title>
+</head>
+<body>
+<div th:insert="common/sourceList :: sourceList"></div>
+<div th:replace="common/header :: header"></div>
+<div class="container-fluid">
+	<h2 class="mt-3">ユーザー一覧</h2>
+	<div class="mt-3">
+		<span>＜絞り込み検索条件＞</span>
+	</div>
+	<div class="mt-1">
+		<form th:action="@{/userList}" method="post" th:object="${userListForm}">
+			<table>
+				<tr>
+					<td><span>ログインID：</span></td>
+					<td>
+						<div class="row g-3 align-items-center">
+							<div class="col-auto">
+								<input type="text" class="form-control" th:field="*{loginId}">
+							</div>
+							<div class="col-auto">
+								<span class="form-text">※部分一致</span>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td><span>アカウント状態：</span></td>
+					<td>
+						<select class="form-select" name="userStatusKind">
+							<option value="">指定なし</option>
+							<option th:each="userStatusKind : ${userStatusKinds}"
+								th:value="${userStatusKind}" th:text="${userStatusKind.displayValue}"></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><span>所有権限：</span></td>
+					<td>
+						<select class="form-select" name="authorityKind">
+							<option value="">指定なし</option>
+							<option th:each="authorityKind : ${authorityKinds}"
+								th:value="${authorityKind}" th:text="${authorityKind.displayValue}"></option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<input type="submit" class="btn btn-primary mt-3" name="search" value="検索">
+		</form>
+	</div>
+</div>
+</html>
