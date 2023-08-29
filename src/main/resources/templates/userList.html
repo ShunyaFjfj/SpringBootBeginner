@@ -52,5 +52,36 @@
 			<input type="submit" class="btn btn-primary mt-3" name="search" value="検索">
 		</form>
 	</div>
+	<div class="mt-3">
+		<form th:action="@{/manageUser}" method="post">
+			<table class="table table-striped" id="userList">
+				<thead>
+					<tr>
+						<th scope="col"></th>
+						<th scope="col">ログインID</th>
+						<th scope="col">ログイン失敗回数</th>
+						<th scope="col">アカウントロック日時</th>
+						<th scope="col">アカウント状態</th>
+						<th scope="col">所有権限</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user, stat  : ${userList}">
+						<th scope="row" th:text="${stat.count}"></th>
+						<td th:id="|loginId_${stat.count}|"><span th:text="${user.loginId}"></span></td>
+						<td th:id="|loginFailureCount_${stat.count}|"><span th:text="${user.loginFailureCount}"></span></td>
+						<td th:id="|accountLockedTime_${stat.count}|"><span th:text="${user.accountLockedTime} != null ? ${#temporals.format(user.accountLockedTime, 'yyyy-MM-dd HH:mm')} : '-'"></span></td>
+						<td th:id="|status_${stat.count}|"><span th:text="${user.status}"></span></td>
+						<td th:id="|authority_${stat.count}|"><span th:text="${user.authority}"></span></td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="submit" class="btn btn-secondary" id="updateBtn" name="update" value="更新" disabled>
+			<input type="button" class="btn btn-danger" id="deleteDummyBtn" value="削除" disabled>
+		</form>
+		<div class="mt-3">
+			<a th:href="@{/menu}">▶トップメニューへ戻る</a>
+		</div>
+	</div>
 </div>
 </html>
