@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -46,6 +47,8 @@ public class SignupServiceImpl implements SignupService {
 		var encodedPassword = passwordEncoder.encode(form.getPassword());
 		userInfo.setPassword(encodedPassword);
 		userInfo.setAuthority(AuthorityKind.ITEM_WATCHER);
+		userInfo.setCreateTime(LocalDateTime.now());
+		userInfo.setUpdateTime(LocalDateTime.now());
 
 		return Optional.of(repository.save(userInfo));
 	}

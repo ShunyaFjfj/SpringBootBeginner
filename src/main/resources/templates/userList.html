@@ -63,6 +63,8 @@
 						<th scope="col">アカウントロック日時</th>
 						<th scope="col">アカウント状態</th>
 						<th scope="col">所有権限</th>
+						<th scope="col">登録日時</th>
+						<th scope="col">最終更新日時</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -73,6 +75,8 @@
 						<td th:id="|accountLockedTime_${stat.count}|"><span th:text="${user.accountLockedTime} != null ? ${#temporals.format(user.accountLockedTime, 'yyyy-MM-dd HH:mm')} : '-'"></span></td>
 						<td th:id="|status_${stat.count}|"><span th:text="${user.status}"></span></td>
 						<td th:id="|authority_${stat.count}|"><span th:text="${user.authority}"></span></td>
+						<td th:id="|createTime_${stat.count}|"><span th:text="${#temporals.format(user.createTime, 'yyyy-MM-dd HH:mm')}"></span></td>
+						<td th:id="|updateTime_${stat.count}|"><span th:text="${#temporals.format(user.updateTime, 'yyyy-MM-dd HH:mm')}"></span></td>
 					</tr>
 				</tbody>
 			</table>

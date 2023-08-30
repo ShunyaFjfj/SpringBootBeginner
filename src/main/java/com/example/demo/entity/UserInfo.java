@@ -52,6 +52,14 @@ public class UserInfo {
 	@Convert(converter = UserAuthorityConverter.class)
 	private AuthorityKind authority;
 
+	/** 登録日時 */
+	@Column(name = "create_time")
+	private LocalDateTime createTime;
+
+	/** 最終更新日時 */
+	@Column(name = "update_time")
+	private LocalDateTime updateTime;
+
 	/**
 	 * デフォルトコンストラクタ
 	 */
@@ -64,7 +72,8 @@ public class UserInfo {
 	 * @return ログイン失敗回数がインクリメントされた、自身のインスタンス
 	 */
 	public UserInfo incrementLoginFailureCount() {
-		return new UserInfo(loginId, password, ++loginFailureCount, accountLockedTime, status, authority);
+		return new UserInfo(loginId, password, ++loginFailureCount, accountLockedTime, status, authority, createTime,
+				updateTime);
 	}
 
 	/**
@@ -73,7 +82,7 @@ public class UserInfo {
 	 * @return ログイン失敗情報がリセットされた、自身のインスタンス
 	 */
 	public UserInfo resetLoginFailureInfo() {
-		return new UserInfo(loginId, password, 0, null, status, authority);
+		return new UserInfo(loginId, password, 0, null, status, authority, createTime, updateTime);
 	}
 
 	/**
@@ -82,7 +91,7 @@ public class UserInfo {
 	 * @return ログイン失敗回数、アカウントロック日時が更新された、自身のインスタンス
 	 */
 	public UserInfo updateAccountLocked() {
-		return new UserInfo(loginId, password, 0, LocalDateTime.now(), status, authority);
+		return new UserInfo(loginId, password, 0, LocalDateTime.now(), status, authority, createTime, updateTime);
 	}
 
 }
