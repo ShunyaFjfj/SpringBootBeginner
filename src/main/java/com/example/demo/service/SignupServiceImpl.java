@@ -51,6 +51,7 @@ public class SignupServiceImpl implements SignupService {
 		userInfo.setAuthority(AuthorityKind.ITEM_WATCHER);
 		userInfo.setCreateTime(LocalDateTime.now());
 		userInfo.setUpdateTime(LocalDateTime.now());
+		userInfo.setUpdateUser(form.getLoginId());
 
 		return Optional.of(repository.save(userInfo));
 	}

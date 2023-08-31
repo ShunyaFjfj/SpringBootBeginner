@@ -34,4 +34,7 @@ public class UserListInfo {
 	/** 更新日時 */
 	private LocalDateTime updateTime;
 
+	/** 最終更新ユーザ */
+	private String updateUser;
+
 }
