@@ -31,7 +31,7 @@ public class UserListInfo {
 	/** 登録日時 */
 	private LocalDateTime createTime;
 
-	/** 更新日時 */
+	/** 最終更新日時 */
 	private LocalDateTime updateTime;
 
 	/** 最終更新ユーザ */
