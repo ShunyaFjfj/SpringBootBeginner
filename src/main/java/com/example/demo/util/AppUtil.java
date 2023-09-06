@@ -13,10 +13,10 @@ import org.springframework.context.MessageSource;
 public class AppUtil {
 
 	/**
-	 * メッセージIDから、プロパティファイルに定義されているメッセージを取得する。
+	 * メッセージIDから、プロパティファイルに定義されているメッセージを取得します。
 	 * 
 	 * <p>取得したメッセージ内で置換が必要な個所がある場合は<br>
-	 * 引数の置換文字群を使って置換を行う。
+	 * 引数の置換文字群を使って置換を行います。
 	 * 
 	 * @param messageSource メッセージソース
 	 * @param messageId メッセージID
