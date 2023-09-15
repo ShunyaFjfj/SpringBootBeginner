@@ -15,6 +15,10 @@ $(function() {
 		// ログインID一時保管
 		editSelectedLoginId($(this));
 	});
+	
+	$('#deleteOkBtn').click(function() {
+		$('#deleteBtn').trigger('click');
+	});
 });
 
 /**

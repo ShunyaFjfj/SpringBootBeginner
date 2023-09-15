@@ -7,8 +7,16 @@
 <body>
 <div th:insert="common/sourceList :: sourceList"></div>
 <div th:replace="common/header :: header"></div>
+<div th:replace="common/messageIcon :: messageIcon"></div>
 <script type="text/javascript" th:src="@{/js/userList.js}"></script>
 <div class="container-fluid">
+	<div class="alert d-flex align-items-center mt-3" th:classappend="|${isError ? 'alert-danger' : 'alert-primary'}|" role="alert" th:if="${message != null}">
+		<svg class="bi flex-shrink-0 me-2" width="24" height="24">
+			<use xlink:href="#exclamation-triangle-fill" th:if="${isError}" />
+			<use xlink:href="#info-fill" th:unless="${isError}"/>
+		</svg>
+		<span th:text="${message}"></span>
+	</div>
 	<h2 class="mt-3">ユーザー一覧</h2>
 	<div class="mt-3">
 		<span>＜絞り込み検索条件＞</span>
@@ -82,9 +90,10 @@
 						</tr>
 					</tbody>
 				</table>
-				<input type="text" id="selectedLoginId" hidden>
+				<input type="text" th:field="*{selectedLoginId}" hidden>
 				<input type="submit" class="btn btn-secondary" id="updateBtn" name="update" value="更新" disabled>
 				<input type="button" class="btn btn-danger" id="deleteDummyBtn" data-bs-toggle="modal" data-bs-target="#deleteConfirm" value="削除" disabled>
+				<input type="submit" id="deleteBtn" name="delete" hidden>
 			</th:block>
 			<th:block th:if="${#lists.isEmpty(userList)}">
 				<div class="text-center">

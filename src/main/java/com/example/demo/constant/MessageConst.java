@@ -19,4 +19,10 @@ public class MessageConst {
 
 	/** ユーザー登録画面：ユーザー登録完了 */
 	public static final String SIGNUP_RESIST_SUCCEED = "signup.resistSucceed";
+
+	/** ユーザー一覧画面：存在しないログインID */
+	public static final String USERLIST_NON_EXISTED_LOGIN_ID = "userList.nonExistedLoginId";
+
+	/** ユーザー一覧画面：ユーザー削除完了 */
+	public static final String USERLIST_DELETE_SUCCEED = "userList.deleteSucceed";
 }

@@ -5,9 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.constant.ExecuteResult;
 import com.example.demo.dto.UserListInfo;
+import com.example.demo.dto.UserSearchInfo;
 import com.example.demo.entity.UserInfo;
-import com.example.demo.form.UserListForm;
 import com.example.demo.repository.UserInfoRepository;
 import com.example.demo.util.AppUtil;
 import com.github.dozermapper.core.Mapper;
@@ -41,9 +42,24 @@ public class UserListServiceImpl implements UserListService {
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<UserListInfo> editUserListByParam(UserListForm form) {
-		var userInfo = mapper.map(form, UserInfo.class);
-		return toUserListInfos(findUserInfoByParam(userInfo));
+	@Override
+	public List<UserListInfo> editUserListByParam(UserSearchInfo dto) {
+		return toUserListInfos(findUserInfoByParam(dto));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ExecuteResult deleteUserInfoById(String loginId) {
+		var userInfo = repository.findById(loginId);
+		if (userInfo.isEmpty()) {
+			return ExecuteResult.ERROR;
+		}
+
+		repository.deleteById(loginId);
+
+		return ExecuteResult.SUCCEED;
 	}
 
 	/**
@@ -52,16 +68,16 @@ public class UserListServiceImpl implements UserListService {
 	 * @param form 入力情報
 	 * @return 検索結果
 	 */
-	private List<UserInfo> findUserInfoByParam(UserInfo userInfo) {
-		var loginIdParam = AppUtil.addWildcard(userInfo.getLoginId());
+	private List<UserInfo> findUserInfoByParam(UserSearchInfo dto) {
+		var loginIdParam = AppUtil.addWildcard(dto.getLoginId());
 
-		if (userInfo.getUserStatusKind() != null && userInfo.getAuthorityKind() != null) {
+		if (dto.getUserStatusKind() != null && dto.getAuthorityKind() != null) {
 			return repository.findByLoginIdLikeAndUserStatusKindAndAuthorityKind(loginIdParam,
-					userInfo.getUserStatusKind(), userInfo.getAuthorityKind());
-		} else if (userInfo.getUserStatusKind() != null) {
-			return repository.findByLoginIdLikeAndUserStatusKind(loginIdParam, userInfo.getUserStatusKind());
-		} else if (userInfo.getAuthorityKind() != null) {
-			return repository.findByLoginIdLikeAndAuthorityKind(loginIdParam, userInfo.getAuthorityKind());
+					dto.getUserStatusKind(), dto.getAuthorityKind());
+		} else if (dto.getUserStatusKind() != null) {
+			return repository.findByLoginIdLikeAndUserStatusKind(loginIdParam, dto.getUserStatusKind());
+		} else if (dto.getAuthorityKind() != null) {
+			return repository.findByLoginIdLikeAndAuthorityKind(loginIdParam, dto.getAuthorityKind());
 		} else {
 			return repository.findByLoginIdLike(loginIdParam);
 		}

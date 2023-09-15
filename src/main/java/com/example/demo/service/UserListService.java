@@ -2,8 +2,9 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import com.example.demo.constant.ExecuteResult;
 import com.example.demo.dto.UserListInfo;
-import com.example.demo.form.UserListForm;
+import com.example.demo.dto.UserSearchInfo;
 
 /**
  * ユーザー一覧画面Serviceクラス
@@ -23,8 +24,16 @@ public interface UserListService {
 	/**
 	 * ユーザー情報を条件検索した結果を画面の表示用に変換して返却します。
 	 * 
-	 * @param form 入力情報
+	 * @param dto 検索に使用するパラメーター
 	 * @return 検索結果
 	 */
-	public List<UserListInfo> editUserListByParam(UserListForm form);
+	public List<UserListInfo> editUserListByParam(UserSearchInfo dto);
+
+	/**
+	 * 指定されたIDのユーザー情報を削除します。
+	 * 
+	 * @param loginId ログインID
+	 * @return 実行結果(エラー有無)
+	 */
+	public ExecuteResult deleteUserInfoById(String loginId);
 }
