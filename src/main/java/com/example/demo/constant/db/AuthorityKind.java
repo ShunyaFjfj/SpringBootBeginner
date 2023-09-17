@@ -1,4 +1,4 @@
-package com.example.demo.constant;
+package com.example.demo.constant.db;
 
 import java.util.Arrays;
 

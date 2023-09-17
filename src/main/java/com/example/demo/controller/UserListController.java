@@ -6,11 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.constant.AuthorityKind;
 import com.example.demo.constant.UserDeleteResult;
 import com.example.demo.constant.UrlConst;
-import com.example.demo.constant.UserStatusKind;
 import com.example.demo.constant.ViewNameConst;
+import com.example.demo.constant.db.AuthorityKind;
+import com.example.demo.constant.db.UserStatusKind;
 import com.example.demo.dto.UserSearchInfo;
 import com.example.demo.form.UserListForm;
 import com.example.demo.service.UserListService;
