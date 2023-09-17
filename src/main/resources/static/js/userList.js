@@ -5,9 +5,9 @@ $(function() {
 	// テーブルの行をクリックしたときの処理
 	$('#userList tbody tr').on('click', function() {
 		// すべての行の選択状態を解除
-		$('#userList tbody tr').removeClass('table-active');
+		$('#userList tbody tr').removeClass('table-row-active');
 		// クリックされた行に選択状態のクラスを追加
-		$(this).addClass('table-active');
+		$(this).addClass('table-row-active');
 		// 更新ボタン、削除ボタンを活性化
 		$('#updateBtn').removeAttr('disabled');
 		$('#deleteDummyBtn').removeAttr('disabled');
