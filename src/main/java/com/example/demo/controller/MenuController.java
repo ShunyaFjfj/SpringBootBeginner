@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.demo.constant.AuthorityKind;
 import com.example.demo.constant.UrlConst;
+import com.example.demo.constant.ViewNameConst;
 
 /**
  * メニュー画面Controllerクラス
@@ -34,7 +35,7 @@ public class MenuController {
 						.equals(AuthorityKind.ITEM_AND_USER_MANAGER.getCode()));
 		model.addAttribute("hasUserManageAuth", hasUserManageAuth);
 
-		return "menu";
+		return ViewNameConst.MENU;
 	}
 
 }

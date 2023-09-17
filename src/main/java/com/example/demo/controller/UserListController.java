@@ -10,6 +10,7 @@ import com.example.demo.constant.AuthorityKind;
 import com.example.demo.constant.ExecuteResult;
 import com.example.demo.constant.UrlConst;
 import com.example.demo.constant.UserStatusKind;
+import com.example.demo.constant.ViewNameConst;
 import com.example.demo.dto.UserSearchInfo;
 import com.example.demo.form.UserListForm;
 import com.example.demo.service.UserListService;
@@ -62,7 +63,7 @@ public class UserListController {
 		model.addAttribute(KEY_USER_STATUS_KIND_OPTIONS, UserStatusKind.values());
 		model.addAttribute(KEY_AUTHORITY_KIND_OPTIONS, AuthorityKind.values());
 
-		return "userList";
+		return ViewNameConst.USER_LIST;
 	}
 
 	/**
@@ -80,7 +81,7 @@ public class UserListController {
 		model.addAttribute(KEY_USER_STATUS_KIND_OPTIONS, UserStatusKind.values());
 		model.addAttribute(KEY_AUTHORITY_KIND_OPTIONS, AuthorityKind.values());
 
-		return "userList";
+		return ViewNameConst.USER_LIST;
 	}
 
 	/**
