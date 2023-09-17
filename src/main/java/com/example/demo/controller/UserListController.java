@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.constant.AuthorityKind;
-import com.example.demo.constant.ExecuteResult;
+import com.example.demo.constant.UserDeleteResult;
 import com.example.demo.constant.UrlConst;
 import com.example.demo.constant.UserStatusKind;
 import com.example.demo.constant.ViewNameConst;
@@ -94,7 +94,7 @@ public class UserListController {
 	@PostMapping(value = UrlConst.USER_LIST, params = "delete")
 	public String deleteUser(Model model, UserListForm form) {
 		var executeResult = service.deleteUserInfoById(form.getSelectedLoginId());
-		model.addAttribute("isError", executeResult == ExecuteResult.ERROR);
+		model.addAttribute("isError", executeResult == UserDeleteResult.ERROR);
 		model.addAttribute("message", AppUtil.getMessage(messageSource, executeResult.getMessageId()));
 
 		// 削除後、フォーム情報の「選択されたログインID」は不要になるため、クリアします。
