@@ -5,9 +5,9 @@
 <title>ユーザー一覧</title>
 </head>
 <body>
-<div th:insert="common/sourceList :: sourceList"></div>
-<div th:replace="common/header :: header"></div>
-<div th:replace="common/messageIcon :: messageIcon"></div>
+<div th:insert="~{common/sourceList :: sourceList}"></div>
+<div th:replace="~{common/header :: header}"></div>
+<div th:replace="~{common/messageIcon :: messageIcon}"></div>
 <script type="text/javascript" th:src="@{/js/userList.js}"></script>
 <div class="container-fluid">
 	<div class="alert d-flex align-items-center mt-3" th:classappend="|${isError ? 'alert-danger' : 'alert-primary'}|" role="alert" th:if="${message != null}">
