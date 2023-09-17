@@ -27,9 +27,10 @@ public class CommonLogAspect {
 	 *
 	 * @param jp 処理を挿入する場所の情報
 	 * @return 指定したメソッドの戻り値
+	 * @throws Throwable メソッド実行時にcatchした例外
 	 */
 	@Around("execution(* com.example.demo..*(..))")
-	public Object writeLog(ProceedingJoinPoint jp) {
+	public Object writeLog(ProceedingJoinPoint jp) throws Throwable {
 		Object targetMethodReturn = null;
 		// 開始ログを出力
 		log.info("start：" + jp.getSignature().toString());
@@ -40,6 +41,7 @@ public class CommonLogAspect {
 		} catch (Throwable t) {
 			// エラーログを出力
 			log.error(t.toString());
+			throw t;
 		}
 
 		// 終了ログを出力
