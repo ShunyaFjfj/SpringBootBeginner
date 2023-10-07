@@ -9,7 +9,7 @@ $(function() {
 		// クリックされた行に選択状態のクラスを追加
 		$(this).addClass('table-row-active');
 		// 更新ボタン、削除ボタンを活性化
-		$('#updateBtn').removeAttr('disabled');
+		$('#editBtn').removeAttr('disabled');
 		$('#deleteDummyBtn').removeAttr('disabled');
 		
 		// ログインID一時保管
