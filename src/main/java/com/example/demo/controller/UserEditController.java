@@ -59,7 +59,7 @@ public class UserEditController {
 		var loginId = (String) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID);
 		var userInfoOpt = service.searchUserInfo(loginId);
 		if (userInfoOpt.isEmpty()) {
-			throw new Exception("ログインIDに該当するユーザー情報が見つかりません。");
+			return ViewNameConst.USER_EDIT_ERROR;
 		}
 		setupCommonInfo(model, userInfoOpt.get());
 
