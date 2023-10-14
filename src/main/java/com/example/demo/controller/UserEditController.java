@@ -80,10 +80,14 @@ public class UserEditController {
 		updateDto.setUpdateUserId(user.getUsername());
 
 		var updateResult = service.updateUserInfo(updateDto);
+		var updateMessage = updateResult.getUpdateMessage();
+		if (updateMessage == UserEditMessage.FAILED) {
+			return ViewNameConst.USER_EDIT_ERROR;
+		}
+
 		setupCommonInfo(model, updateResult.getUpdateUserInfo());
 
-		var updateMessage = updateResult.getUpdateMessage();
-		model.addAttribute("isError", updateMessage == UserEditMessage.FAILED);
+		model.addAttribute("isError", true);
 		model.addAttribute("message", AppUtil.getMessage(messageSource, updateMessage.getMessageId()));
 
 		return ViewNameConst.USER_EDIT;
