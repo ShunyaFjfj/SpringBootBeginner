@@ -91,7 +91,7 @@ public class UserEditController {
 
 		setupCommonInfo(model, updateResult.getUpdateUserInfo());
 
-		model.addAttribute("isError", true);
+		model.addAttribute("isError", false);
 		model.addAttribute("message", AppUtil.getMessage(messageSource, updateMessage.getMessageId()));
 
 		return ViewNameConst.USER_EDIT;
