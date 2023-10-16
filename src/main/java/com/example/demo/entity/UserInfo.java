@@ -35,6 +35,18 @@ public class UserInfo {
 	/** パスワード */
 	private String password;
 
+	/** メールアドレス */
+	@Column(name = "mail_address")
+	private String mailAddress;
+
+	/** ワンタイムコード */
+	@Column(name = "one_time_code")
+	private String oneTimeCode;
+
+	/** ワンタイムコード有効期限 */
+	@Column(name = "one_time_code_expiration")
+	private LocalDateTime oneTimeCodeExpiration;
+
 	/** ログイン失敗回数 */
 	@Column(name = "login_failure_count")
 	private int loginFailureCount = 0;
@@ -77,8 +89,8 @@ public class UserInfo {
 	 * @return ログイン失敗回数がインクリメントされた、自身のインスタンス
 	 */
 	public UserInfo incrementLoginFailureCount() {
-		return new UserInfo(loginId, password, ++loginFailureCount, accountLockedTime, userStatusKind, authorityKind,
-				createTime, updateTime, updateUser);
+		return new UserInfo(loginId, password, mailAddress, oneTimeCode, oneTimeCodeExpiration, ++loginFailureCount,
+				accountLockedTime, userStatusKind, authorityKind, createTime, updateTime, updateUser);
 	}
 
 	/**
@@ -87,8 +99,8 @@ public class UserInfo {
 	 * @return ログイン失敗情報がリセットされた、自身のインスタンス
 	 */
 	public UserInfo resetLoginFailureInfo() {
-		return new UserInfo(loginId, password, 0, null, userStatusKind, authorityKind, createTime, updateTime,
-				updateUser);
+		return new UserInfo(loginId, password, mailAddress, oneTimeCode, oneTimeCodeExpiration, 0, null, userStatusKind,
+				authorityKind, createTime, updateTime, updateUser);
 	}
 
 	/**
@@ -97,8 +109,8 @@ public class UserInfo {
 	 * @return ログイン失敗回数、アカウントロック日時が更新された、自身のインスタンス
 	 */
 	public UserInfo updateAccountLocked() {
-		return new UserInfo(loginId, password, 0, LocalDateTime.now(), userStatusKind, authorityKind, createTime,
-				updateTime, updateUser);
+		return new UserInfo(loginId, password, mailAddress, oneTimeCode, oneTimeCodeExpiration, 0, LocalDateTime.now(),
+				userStatusKind, authorityKind, createTime, updateTime, updateUser);
 	}
 
 }

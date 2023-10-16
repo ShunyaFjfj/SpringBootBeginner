@@ -28,6 +28,11 @@
 				<input type="password" class="form-control" th:field="*{password}">
 			</div>
 			<span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+			<div  class="col-9 col-md-6 col-xxl-3">
+				<p><label for="mailAddress">メールアドレス：</label>
+				<input type="text" class="form-control" th:field="*{mailAddress}">
+				<span class="text-danger" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></span>
+			</div>
 			<p><input type="submit" class="btn btn-primary" value="ユーザー登録">
 		</div>
 	</form>
