@@ -18,17 +18,17 @@
 	</div>
 	<form th:action="@{/signup}" method="post" th:object="${signupForm}">
 		<div class="form-group">
-			<div class="col-3 col-md-2 col-xxl-1">
+			<div class="col-9 col-md-6 col-xxl-3">
 				<p><label for="loginId">ログインID：</label>
 				<input type="text" class="form-control" th:field="*{loginId}">
+				<span class="text-danger" th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
 			</div>
-			<span class="text-danger" th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
-			<div  class="col-3 col-md-2 col-xxl-1">
+			<div class="col-9 col-md-6 col-xxl-3">
 				<p><label for="password">パスワード：</label>
 				<input type="password" class="form-control" th:field="*{password}">
+				<span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 			</div>
-			<span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-			<div  class="col-9 col-md-6 col-xxl-3">
+			<div class="col-9 col-md-6 col-xxl-3">
 				<p><label for="mailAddress">メールアドレス：</label>
 				<input type="text" class="form-control" th:field="*{mailAddress}">
 				<span class="text-danger" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></span>
