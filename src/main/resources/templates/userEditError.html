@@ -5,8 +5,13 @@
 <title>ユーザー編集</title>
 </head>
 <body>
-エラーが発生しました。
-前の画面に戻って操作をやり直してください。
-<p><a th:href="@{/userList}">前の画面へ戻る</a>
+<div th:insert="~{common/sourceList :: sourceList}"></div>
+
+<div class="container-fluid">
+	<p>エラーが発生しました。前の画面に戻って操作をやり直してください。
+	
+	<p><span class="text-danger" th:text="${message}"></span>
+	<p><a th:href="@{/userList}">前の画面へ戻る</a>
+</div>
 </body>
 </html>
