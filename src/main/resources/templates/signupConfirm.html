@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>登録仮完了</title>
+</head>
+<body>
+<div th:insert="~{common/sourceList :: sourceList}"></div>
+<div th:replace="~{common/messageIcon :: messageIcon}"></div>
+<div class="container-fluid">
+	<h2>登録仮完了画面</h2>
+	<div class="alert d-flex align-items-center mt-3" th:classappend="|${isError ? 'alert-danger' : 'alert-primary'}|" role="alert" th:if="${message != null}">
+		<svg class="bi flex-shrink-0 me-2" width="24" height="24">
+			<use xlink:href="#exclamation-triangle-fill" th:if="${isError}" />
+			<use xlink:href="#info-fill" th:unless="${isError}"/>
+		</svg>
+		<span th:text="${message}"></span>
+	</div>
+	ユーザーの登録が仮完了しました。<br>
+	登録されたメールアドレスへ本登録に必要なワンタイムコードを送信しましたので、確認を行い画面に入力してください。<p>
+	<form th:action="@{/signupConfirm}" method="post">
+		<table>
+			<tr>
+				<td><label for="oneTimeCode">ワンタイムコード：</label></td>
+				<td>
+					<div class="row g-3 align-items-center">
+						<div class="col-auto">
+							<input type="text" class="form-control" id="oneTimeCode" name="oneTimeCode">
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div class="mt-3">
+			<input type="submit" class="btn btn-primary" value="確認">
+		</div>
+		<div class="mt-3">
+			<a th:href="@{/login}">▶ログイン画面へ戻る</a>
+		</div>
+	</form>
+</div>
+</body>
+</html>
