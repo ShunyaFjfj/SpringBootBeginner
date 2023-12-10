@@ -69,7 +69,11 @@ public class UserEditController {
 					AppUtil.getMessage(messageSource, MessageConst.USEREDIT_NON_EXISTED_LOGIN_ID));
 			return ViewNameConst.USER_EDIT_ERROR;
 		}
-		setupCommonInfo(model, userInfoOpt.get());
+		var userInfo = userInfoOpt.get();
+		model.addAttribute("userEditForm", mapper.map(userInfo, UserEditForm.class));
+		model.addAttribute("userEditInfo", mapper.map(userInfo, UserEditInfo.class));
+		model.addAttribute("userStatusKindOptions", UserStatusKind.values());
+		model.addAttribute("authorityKindOptions", AuthorityKind.values());
 
 		return ViewNameConst.USER_EDIT;
 	}
@@ -116,18 +120,4 @@ public class UserEditController {
 		return AppUtil.doRedirect(UrlConst.USER_EDIT);
 	}
 
-	/**
-	 * 画面表示に必要な共通項目の設定を行います。
-	 * 
-	 * @param model モデル
-	 * @param editedForm 入力済みのフォーム情報
-	 */
-	private void setupCommonInfo(Model model, UserInfo userInfo) {
-		model.addAttribute("userEditForm", mapper.map(userInfo, UserEditForm.class));
-		model.addAttribute("userEditInfo", mapper.map(userInfo, UserEditInfo.class));
-
-		model.addAttribute("userStatusKindOptions", UserStatusKind.values());
-		model.addAttribute("authorityKindOptions", AuthorityKind.values());
-	}
-	
 }
