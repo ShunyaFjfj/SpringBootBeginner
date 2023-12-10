@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.constant.MessageConst;
 import com.example.demo.constant.SessionKeyConst;
@@ -48,6 +49,9 @@ public class UserEditController {
 	/** メッセージソース */
 	private final MessageSource messageSource;
 
+	/** リダイレクトパラメータ：エラー有 */
+	private static final String REDIRECT_PRAM_ERR = "err";
+
 	/**
 	 * 前画面で選択されたログインIDに紐づくユーザー情報を画面に表示します。
 	 * 
@@ -70,14 +74,26 @@ public class UserEditController {
 	}
 
 	/**
-	 * 画面の入力情報をもとにユーザー情報を更新します。
+	 * 画面の更新エラー時にエラーメッセージを表示します。
 	 * 
 	 * @param model モデル
+	 * @return 表示画面
+	 */
+	@GetMapping(value = UrlConst.USER_EDIT, params = REDIRECT_PRAM_ERR)
+	public String viewWithError(Model model) {
+		return ViewNameConst.USER_EDIT_ERROR;
+	}
+
+	/**
+	 * 画面の入力情報をもとにユーザー情報を更新します。
+	 * 
 	 * @param form 入力情報
+	 * @param redirectAttributes リダイレクト用オブジェクト
 	 * @return 表示画面
 	 */
 	@PostMapping(value = UrlConst.USER_EDIT, params = "update")
-	public String updateUser(Model model, UserEditForm form, @AuthenticationPrincipal User user) {
+	public String updateUser(UserEditForm form, @AuthenticationPrincipal User user,
+			RedirectAttributes redirectAttributes) {
 		var updateDto = mapper.map(form, UserUpdateInfo.class);
 		updateDto.setLoginId((String) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID));
 		updateDto.setUpdateUserId(user.getUsername());
@@ -85,16 +101,17 @@ public class UserEditController {
 		var updateResult = service.updateUserInfo(updateDto);
 		var updateMessage = updateResult.getUpdateMessage();
 		if (updateMessage == UserEditMessage.FAILED) {
-			model.addAttribute("message", AppUtil.getMessage(messageSource, updateMessage.getMessageId()));
-			return ViewNameConst.USER_EDIT_ERROR;
+			redirectAttributes.addFlashAttribute("message",
+					AppUtil.getMessage(messageSource, updateMessage.getMessageId()));
+			redirectAttributes.addAttribute(REDIRECT_PRAM_ERR, "");
+			return AppUtil.doRedirect(UrlConst.USER_EDIT);
 		}
 
-		setupCommonInfo(model, updateResult.getUpdateUserInfo());
+		redirectAttributes.addFlashAttribute("isError", false);
+		redirectAttributes.addFlashAttribute("message",
+				AppUtil.getMessage(messageSource, updateMessage.getMessageId()));
 
-		model.addAttribute("isError", false);
-		model.addAttribute("message", AppUtil.getMessage(messageSource, updateMessage.getMessageId()));
-
-		return ViewNameConst.USER_EDIT;
+		return AppUtil.doRedirect(UrlConst.USER_EDIT);
 	}
 
 	/**
