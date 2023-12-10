@@ -17,5 +17,5 @@ public interface SignupConfirmService {
 	 * @param oneTimeCode ワンタイムコード
 	 * @return 検索結果(エラーが無ければ{@code SignupResult.SUCCEED})
 	 */
-	SignupConfirmStatus chkTentativeSignupUser(String loginId, String oneTimeCode);
+	SignupConfirmStatus updateUserAsSignupCompletion(String loginId, String oneTimeCode);
 }

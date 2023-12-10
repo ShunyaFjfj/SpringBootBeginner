@@ -65,7 +65,7 @@ public class SignupConfirmController {
 			return AppUtil.doRedirect(UrlConst.SIGNUP_CONFIRM);
 		}
 
-		var signupConfirmStatus = service.chkTentativeSignupUser(loginId, oneTimeCode);
+		var signupConfirmStatus = service.updateUserAsSignupCompletion(loginId, oneTimeCode);
 
 		// 次画面にワンタイムコード認証結果の情報を渡す
 		var message = AppUtil.getMessage(messageSource, signupConfirmStatus.getMessageId());
