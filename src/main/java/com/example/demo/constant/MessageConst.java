@@ -11,9 +11,6 @@ public class MessageConst {
 	/** 共通：入力内容誤り */
 	public static final String FORM_ERROR = "common.formError";
 
-	/** ログイン画面：入力内容誤り */
-	public static final String LOGIN_WRONG_INPUT = "login.wrongInput";
-
 	/** ユーザー登録画面：既に本登録済み */
 	public static final String SIGNUP_ALREADY_COMPLETED = "signup.alreadyCompleted";
 
