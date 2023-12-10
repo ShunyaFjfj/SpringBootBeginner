@@ -6,16 +6,9 @@
 </head>
 <body>
 <div th:insert="~{common/sourceList :: sourceList}"></div>
-<div th:replace="~{common/messageIcon :: messageIcon}"></div>
 <div class="container-fluid">
 	<h2>登録仮完了画面</h2>
-	<div class="alert d-flex align-items-center mt-3" th:classappend="|${isError ? 'alert-danger' : 'alert-primary'}|" role="alert" th:if="${message != null}">
-		<svg class="bi flex-shrink-0 me-2" width="24" height="24">
-			<use xlink:href="#exclamation-triangle-fill" th:if="${isError}" />
-			<use xlink:href="#info-fill" th:unless="${isError}"/>
-		</svg>
-		<span th:text="${message}"></span>
-	</div>
+	<div th:insert="~{common/guideMessage :: guideMessage}"></div>
 	ユーザーの登録が仮完了しました。<br>
 	登録されたメールアドレスへ本登録に必要なワンタイムコードを送信しましたので、確認を行い画面に入力してください。<p>
 	<form th:action="@{/signupConfirm}" method="post">

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body th:fragment="guideMessage">
+<div th:replace="~{common/messageIcon :: messageIcon}"></div>
+<div class="alert d-flex align-items-center" th:classappend="|${isError ? 'alert-danger' : 'alert-primary'}|" role="alert" th:if="${message != null}">
+	<svg class="bi flex-shrink-0 me-2" width="24" height="24">
+		<use xlink:href="#exclamation-triangle-fill" th:if="${isError}" />
+		<use xlink:href="#info-fill" th:unless="${isError}"/>
+	</svg>
+	<span th:text="${message}"></span>
+</div>
+</body>
+</html>

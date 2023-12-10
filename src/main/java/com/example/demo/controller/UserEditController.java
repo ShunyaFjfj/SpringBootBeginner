@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.constant.MessageConst;
+import com.example.demo.constant.ModelKey;
 import com.example.demo.constant.SessionKeyConst;
 import com.example.demo.constant.UrlConst;
 import com.example.demo.constant.UserEditMessage;
@@ -64,7 +65,7 @@ public class UserEditController {
 		var loginId = (String) session.getAttribute(SessionKeyConst.SELECETED_LOGIN_ID);
 		var userInfoOpt = service.searchUserInfo(loginId);
 		if (userInfoOpt.isEmpty()) {
-			model.addAttribute("message",
+			model.addAttribute(ModelKey.MESSAGE,
 					AppUtil.getMessage(messageSource, MessageConst.USEREDIT_NON_EXISTED_LOGIN_ID));
 			return ViewNameConst.USER_EDIT_ERROR;
 		}
@@ -101,14 +102,14 @@ public class UserEditController {
 		var updateResult = service.updateUserInfo(updateDto);
 		var updateMessage = updateResult.getUpdateMessage();
 		if (updateMessage == UserEditMessage.FAILED) {
-			redirectAttributes.addFlashAttribute("message",
+			redirectAttributes.addFlashAttribute(ModelKey.MESSAGE,
 					AppUtil.getMessage(messageSource, updateMessage.getMessageId()));
 			redirectAttributes.addAttribute(REDIRECT_PRAM_ERR, "");
 			return AppUtil.doRedirect(UrlConst.USER_EDIT);
 		}
 
-		redirectAttributes.addFlashAttribute("isError", false);
-		redirectAttributes.addFlashAttribute("message",
+		redirectAttributes.addFlashAttribute(ModelKey.IS_ERROR, false);
+		redirectAttributes.addFlashAttribute(ModelKey.MESSAGE,
 				AppUtil.getMessage(messageSource, updateMessage.getMessageId()));
 
 		return AppUtil.doRedirect(UrlConst.USER_EDIT);

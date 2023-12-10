@@ -6,16 +6,9 @@
 </head>
 <body>
 <div th:insert="~{common/sourceList :: sourceList}"></div>
-<div th:replace="~{common/messageIcon :: messageIcon}"></div>
 <div class="container-fluid">
 	<h2>ユーザー登録画面</h2>
-	<div class="alert d-flex align-items-center" th:classappend="|${isError ? 'alert-danger' : 'alert-primary'}|" role="alert" th:if="${message != null}">
-		<svg class="bi flex-shrink-0 me-2" width="24" height="24">
-			<use xlink:href="#exclamation-triangle-fill" th:if="${isError}" />
-			<use xlink:href="#info-fill" th:unless="${isError}"/>
-		</svg>
-		<span th:text="${message}"></span>
-	</div>
+	<div th:insert="~{common/guideMessage :: guideMessage}"></div>
 	<form th:action="@{/signup}" method="post" th:object="${signupForm}">
 		<div class="form-group">
 			<div class="col-9 col-md-6 col-xxl-3">

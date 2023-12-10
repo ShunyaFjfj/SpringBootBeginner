@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.constant.ModelKey;
 import com.example.demo.constant.SessionKeyConst;
 import com.example.demo.constant.UrlConst;
 import com.example.demo.constant.UserDeleteResult;
@@ -144,8 +145,8 @@ public class UserListController {
 	@PostMapping(value = UrlConst.USER_LIST, params = "delete")
 	public String deleteUser(UserListForm form, RedirectAttributes redirectAttributes) {
 		var executeResult = service.deleteUserInfoById(form.getSelectedLoginId());
-		redirectAttributes.addFlashAttribute("isError", executeResult == UserDeleteResult.ERROR);
-		redirectAttributes.addFlashAttribute("message",
+		redirectAttributes.addFlashAttribute(ModelKey.IS_ERROR, executeResult == UserDeleteResult.ERROR);
+		redirectAttributes.addFlashAttribute(ModelKey.MESSAGE,
 				AppUtil.getMessage(messageSource, executeResult.getMessageId()));
 		// 削除後、フォーム情報の「選択されたログインID」は不要になるため、クリアします。
 		redirectAttributes.addFlashAttribute(KEY_USERLIST_FORM, form.clearSelectedLoginId());
