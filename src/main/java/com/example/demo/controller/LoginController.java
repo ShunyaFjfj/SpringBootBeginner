@@ -31,7 +31,7 @@ public class LoginController {
 	 * 
 	 * @param model モデル
 	 * @param form 入力情報
-	 * @return ログイン画面
+	 * @return ログイン画面テンプレート名
 	 */
 	@GetMapping(UrlConst.LOGIN)
 	public String view(Model model, LoginForm form) {
@@ -43,7 +43,7 @@ public class LoginController {
 	 * 
 	 * @param model モデル
 	 * @param form 入力情報
-	 * @return ログイン画面
+	 * @return ログイン画面テンプレート名
 	 */
 	@GetMapping(value = UrlConst.LOGIN, params = "error")
 	public String viewWithError(Model model, LoginForm form) {

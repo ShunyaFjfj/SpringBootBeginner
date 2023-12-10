@@ -7,7 +7,7 @@ import com.example.demo.dto.UserUpdateInfo;
 import com.example.demo.entity.UserInfo;
 
 /**
- * ユーザー編集画面Serviceクラス
+ * ユーザー編集画面Serviceインターフェース
  * 
  * @author ys-fj
  *

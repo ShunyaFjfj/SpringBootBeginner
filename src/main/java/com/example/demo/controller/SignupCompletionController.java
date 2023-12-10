@@ -19,11 +19,10 @@ public class SignupCompletionController {
 	/**
 	 * 画面の初期表示を行います。
 	 * 
-	 * @return ユーザー登録情報確認結果画面
+	 * @return ユーザー登録情報確認結果画面テンプレート名
 	 */
 	@GetMapping(UrlConst.SIGNUP_COMPLETION)
 	public String view(Model model) {
-
 		return ViewNameConst.SIGNUP_COMPLETION;
 	}
 

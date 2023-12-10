@@ -69,7 +69,8 @@ public class UserListController {
 	 * <p>またその際、画面選択項目「アカウント状態」「所有権限」の選択肢を生成して画面に渡します。
 	 * 
 	 * @param model モデル
-	 * @return 表示画面
+	 * @param form 入力情報
+	 * @return ユーザー一覧画面テンプレート名
 	 */
 	@GetMapping(UrlConst.USER_LIST)
 	public String view(Model model, UserListForm form) {
@@ -108,6 +109,7 @@ public class UserListController {
 	/**
 	 * 検索条件に合致するユーザー情報を画面に表示します。
 	 * 
+	 * @param form 入力情報
 	 * @param redirectAttributes リダイレクト用オブジェクト
 	 * @return リダイレクトURL
 	 */
@@ -125,7 +127,6 @@ public class UserListController {
 	/**
 	 * 選択行のユーザー情報を削除して、最新情報で画面を再表示します。
 	 * 
-	 * @param model モデル
 	 * @param form 入力情報
 	 * @return リダイレクトURL
 	 */
@@ -140,7 +141,7 @@ public class UserListController {
 	 * 
 	 * @param form 入力情報
 	 * @param redirectAttributes リダイレクト用オブジェクト
-	 * @return 表示画面
+	 * @return リダイレクトURL
 	 */
 	@PostMapping(value = UrlConst.USER_LIST, params = "delete")
 	public String deleteUser(UserListForm form, RedirectAttributes redirectAttributes) {

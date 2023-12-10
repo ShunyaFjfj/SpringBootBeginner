@@ -7,7 +7,7 @@ import com.example.demo.dto.UserListInfo;
 import com.example.demo.dto.UserSearchInfo;
 
 /**
- * ユーザー一覧画面Serviceクラス
+ * ユーザー一覧画面Serviceインターフェース
  * 
  * @author ys-fj
  *

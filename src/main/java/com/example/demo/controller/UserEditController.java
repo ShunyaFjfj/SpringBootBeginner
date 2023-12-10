@@ -19,7 +19,6 @@ import com.example.demo.constant.db.AuthorityKind;
 import com.example.demo.constant.db.UserStatusKind;
 import com.example.demo.dto.UserEditInfo;
 import com.example.demo.dto.UserUpdateInfo;
-import com.example.demo.entity.UserInfo;
 import com.example.demo.form.UserEditForm;
 import com.example.demo.service.UserEditService;
 import com.example.demo.util.AppUtil;
@@ -57,7 +56,8 @@ public class UserEditController {
 	 * 前画面で選択されたログインIDに紐づくユーザー情報を画面に表示します。
 	 * 
 	 * @param model モデル
-	 * @return 表示画面
+	 * @param form 入力情報
+	 * @return ユーザー編集画面テンプレート名
 	 * @throws Exception 
 	 */
 	@GetMapping(UrlConst.USER_EDIT)
@@ -78,7 +78,7 @@ public class UserEditController {
 	 * 画面の更新エラー時にエラーメッセージを表示します。
 	 * 
 	 * @param model モデル
-	 * @return 表示画面
+	 * @return ユーザー編集エラー画面テンプレート名
 	 */
 	@GetMapping(value = UrlConst.USER_EDIT, params = REDIRECT_PRAM_ERR)
 	public String viewWithError(Model model) {
@@ -89,8 +89,9 @@ public class UserEditController {
 	 * 画面の入力情報をもとにユーザー情報を更新します。
 	 * 
 	 * @param form 入力情報
+	 * @param user 認証済みユーザー情報
 	 * @param redirectAttributes リダイレクト用オブジェクト
-	 * @return 表示画面
+	 * @return リダイレクトURL
 	 */
 	@PostMapping(value = UrlConst.USER_EDIT, params = "update")
 	public String updateUser(UserEditForm form, @AuthenticationPrincipal User user,
@@ -128,5 +129,5 @@ public class UserEditController {
 		model.addAttribute("userStatusKindOptions", UserStatusKind.values());
 		model.addAttribute("authorityKindOptions", AuthorityKind.values());
 	}
-
+	
 }

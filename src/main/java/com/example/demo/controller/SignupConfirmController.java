@@ -42,13 +42,20 @@ public class SignupConfirmController {
 	 * 
 	 * @param oneTimeCode ワンタイムコード
 	 * @param redirectAttributes リダイレクト用モデル
-	 * @return ユーザー本登録完了画面
+	 * @return ユーザー本登録完了画面テンプレート名
 	 */
 	@GetMapping(UrlConst.SIGNUP_CONFIRM)
 	public String view() {
 		return ViewNameConst.SIGNUP_CONFIRM;
 	}
 
+	/**
+	 * 画面に入力されたワンタイムコードの認証を行います。
+	 * 
+	 * @param oneTimeCode 入力されたワンタイムコード
+	 * @param redirectAttributes リダイレクト用オブジェクト
+	 * @return リダイレクトURL
+	 */
 	@PostMapping(UrlConst.SIGNUP_CONFIRM)
 	public String signupConfirm(String oneTimeCode, RedirectAttributes redirectAttributes) {
 		var loginId = (String) session.getAttribute(SessionKeyConst.ONE_TIME_AUTH_LOGIN_ID);

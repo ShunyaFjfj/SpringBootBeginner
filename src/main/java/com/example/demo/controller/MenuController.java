@@ -26,7 +26,7 @@ public class MenuController {
 	 * 
 	 * @param user 認証済みユーザー情報
 	 * @param model モデル
-	 * @return メニュー画面
+	 * @return メニュー画面テンプレート名
 	 */
 	@GetMapping(UrlConst.MENU)
 	public String view(@AuthenticationPrincipal User user, Model model) {
