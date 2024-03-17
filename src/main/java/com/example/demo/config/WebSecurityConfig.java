@@ -5,12 +5,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.example.demo.authentication.CustomFilter;
 import com.example.demo.constant.UrlConst;
 
 import lombok.RequiredArgsConstructor;
@@ -54,16 +61,15 @@ public class WebSecurityConfig {
 	 * @throws Exception 予期せぬ例外が発生した場合
 	 */
 	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationConfiguration authenticationConfiguration)
+			throws Exception {
 
 		http
+				.addFilterBefore(customFilter(authenticationConfiguration), UsernamePasswordAuthenticationFilter.class)
 				.authorizeHttpRequests(
 						authorize -> authorize.requestMatchers(UrlConst.NO_AUTHENTICATION).permitAll()
 								.anyRequest().authenticated())
-				.formLogin(
-						login -> login.loginPage(UrlConst.LOGIN) // 自作ログイン画面(Controller)を使うための設定
-								.usernameParameter(USERNAME_PARAMETER) // ユーザ名パラメータのname属性
-								.defaultSuccessUrl(UrlConst.MENU)); // ログイン成功後のリダイレクトURL
+				.formLogin(login -> login.loginPage(UrlConst.LOGIN)); // 自作ログイン画面(Controller)を使うための設定
 
 		return http.build();
 	}
@@ -88,5 +94,29 @@ public class WebSecurityConfig {
 		provider.setMessageSource(messageSource);
 
 		return provider;
+	}
+
+	private AuthenticationSuccessHandler successHandler() {
+		// TODO 正常系で正しく画面遷移しないので、多分ここを直さないといけない
+		var successHandler = new SimpleUrlAuthenticationSuccessHandler();
+		successHandler.setDefaultTargetUrl("http://localhost:8080" + UrlConst.MENU);
+		successHandler.setAlwaysUseDefaultTargetUrl(true);
+		return successHandler;
+	}
+
+	private AuthenticationFailureHandler failureHandler() {
+		var failureHandler = new SimpleUrlAuthenticationFailureHandler();
+		failureHandler.setDefaultFailureUrl("/login?error");
+		return failureHandler;
+	}
+
+	private CustomFilter customFilter(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+		var customFilter = new CustomFilter();
+		customFilter.setAuthenticationManager(authenticationConfiguration.getAuthenticationManager());
+		customFilter.setUsernameParameter(USERNAME_PARAMETER);
+		customFilter.setAuthenticationSuccessHandler(successHandler());
+		customFilter.setAuthenticationFailureHandler(failureHandler());
+
+		return customFilter;
 	}
 }
