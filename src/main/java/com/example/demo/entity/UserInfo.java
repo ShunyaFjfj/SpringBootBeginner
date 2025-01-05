@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * ユーザー情報テーブルEntityクラス
@@ -25,6 +26,7 @@ import lombok.Data;
 @Table(name = "user_info")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserInfo {
 
 	/** ログインID */
@@ -34,6 +36,10 @@ public class UserInfo {
 
 	/** パスワード */
 	private String password;
+
+	/** ユーザー名 */
+	@Column(name = "user_name")
+	private String userName;
 
 	/** メールアドレス */
 	@Column(name = "mail_address")
@@ -82,19 +88,14 @@ public class UserInfo {
 	private String updateUser;
 
 	/**
-	 * デフォルトコンストラクタ
-	 */
-	public UserInfo() {
-	}
-
-	/**
 	 * ログイン失敗回数をインクリメントします。
 	 * 
 	 * @return ログイン失敗回数がインクリメントされた、自身のインスタンス
 	 */
 	public UserInfo incrementLoginFailureCount() {
-		return new UserInfo(loginId, password, mailAddress, oneTimeCode, oneTimeCodeSendTime, ++loginFailureCount,
-				accountLockedTime, userStatusKind, authorityKind, signupCompleted, createTime, updateTime, updateUser);
+		return new UserInfo(loginId, password, userName, mailAddress, oneTimeCode, oneTimeCodeSendTime,
+				++loginFailureCount, accountLockedTime, userStatusKind, authorityKind, signupCompleted, createTime,
+				updateTime, updateUser);
 	}
 
 	/**
@@ -103,8 +104,8 @@ public class UserInfo {
 	 * @return ログイン失敗情報がリセットされた、自身のインスタンス
 	 */
 	public UserInfo resetLoginFailureInfo() {
-		return new UserInfo(loginId, password, mailAddress, oneTimeCode, oneTimeCodeSendTime, 0, null, userStatusKind,
-				authorityKind, signupCompleted, createTime, updateTime, updateUser);
+		return new UserInfo(loginId, password, userName, mailAddress, oneTimeCode, oneTimeCodeSendTime, 0, null,
+				userStatusKind, authorityKind, signupCompleted, createTime, updateTime, updateUser);
 	}
 
 	/**
@@ -113,8 +114,9 @@ public class UserInfo {
 	 * @return ログイン失敗回数、アカウントロック日時が更新された、自身のインスタンス
 	 */
 	public UserInfo updateAccountLocked() {
-		return new UserInfo(loginId, password, mailAddress, oneTimeCode, oneTimeCodeSendTime, 0, LocalDateTime.now(),
-				userStatusKind, authorityKind, signupCompleted, createTime, updateTime, updateUser);
+		return new UserInfo(loginId, password, userName, mailAddress, oneTimeCode, oneTimeCodeSendTime, 0,
+				LocalDateTime.now(), userStatusKind, authorityKind, signupCompleted, createTime, updateTime,
+				updateUser);
 	}
 
 }
